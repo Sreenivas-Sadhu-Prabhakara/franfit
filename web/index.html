@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FranFit — Franchise Matchmaker</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2312312e'/%3E%3Ctext x='16' y='22' font-family='Arial Narrow, sans-serif' font-size='17' font-weight='bold' fill='%23e8a020' text-anchor='middle'%3EFF%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="#" data-nav="discover">
+      <svg class="wordmark-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="var(--ink)"/>
+        <path d="M10 23V9h12v3h-8.4v3.4h7V18h-7v5z" fill="var(--marigold)"/>
+      </svg>
+      <span class="wordmark-text">Fran<em>Fit</em></span>
+    </a>
+    <p class="tagline">Sahi brand. Sahi model. Apna business.</p>
+    <nav class="nav">
+      <button class="nav-link is-active" data-nav="discover">Find my fit</button>
+      <button class="nav-link" data-nav="leads">Leads <span class="nav-count" id="leadCount" hidden></span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ DISCOVER VIEW ============ -->
+  <section id="view-discover" class="view">
+
+    <div class="hero">
+      <p class="hero-eyebrow">Franchise matchmaking for India</p>
+      <h1 class="hero-title">Three questions stand between you<br>and the right franchise.</h1>
+      <p class="hero-sub">Answer honestly about your capital, your time and your appetite for risk — FranFit scores all <span class="num" id="heroBrandCount">30</span> brands in the directory against <strong>you</strong>, not the other way round.</p>
+    </div>
+
+    <div class="wizard card" id="wizard">
+      <ol class="wiz-rail" aria-label="Quiz steps">
+        <li class="wiz-tab is-active" data-step="1"><span class="wiz-tab-step">Step 1</span><span class="wiz-tab-name">Money &amp; space</span></li>
+        <li class="wiz-tab" data-step="2"><span class="wiz-tab-step">Step 2</span><span class="wiz-tab-name">Involvement &amp; risk</span></li>
+        <li class="wiz-tab" data-step="3"><span class="wiz-tab-step">Step 3</span><span class="wiz-tab-name">Categories</span></li>
+      </ol>
+
+      <!-- Step 1 -->
+      <div class="wiz-step is-active" data-step="1">
+        <div class="field">
+          <label for="budget">Investment budget</label>
+          <p class="field-help">Everything you can commit — setup, fee and working capital.</p>
+          <div class="budget-row">
+            <input type="range" id="budgetRange" min="2" max="150" step="1" value="30" aria-label="Budget in lakhs">
+            <output class="budget-readout num" id="budgetReadout">₹30 L</output>
+          </div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="city">Your city</label>
+            <input type="text" id="city" placeholder="e.g. Jaipur" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>City tier</label>
+            <div class="chip-row" id="tierChips" role="radiogroup" aria-label="City tier">
+              <button class="chip" data-tier="1" role="radio" aria-checked="false">Tier 1<small>Mumbai, Bengaluru…</small></button>
+              <button class="chip is-on" data-tier="2" role="radio" aria-checked="true">Tier 2<small>Jaipur, Kochi…</small></button>
+              <button class="chip" data-tier="3" role="radio" aria-checked="false">Tier 3<small>Satara, Hajipur…</small></button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="space">Space you already have <span class="opt">(optional)</span></label>
+            <div class="suffix-input">
+              <input type="number" id="space" min="0" step="50" placeholder="0">
+              <span>sqft</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="wiz-step" data-step="2">
+        <div class="field">
+          <label>How involved will you be?</label>
+          <div class="inv-cards" id="invCards" role="radiogroup" aria-label="Involvement">
+            <button class="inv-card is-on" data-inv="owner-operator" role="radio" aria-checked="true">
+              <span class="inv-title">Owner-operator</span>
+              <span class="inv-desc">This is my full-time job. I'll stand at the counter.</span>
+              <span class="inv-models num">FOFO · FICO</span>
+            </button>
+            <button class="inv-card" data-inv="part-time" role="radio" aria-checked="false">
+              <span class="inv-title">Part-time</span>
+              <span class="inv-desc">Evenings and weekends. A manager runs the day.</span>
+              <span class="inv-models num">FICO · FOCO</span>
+            </button>
+            <button class="inv-card" data-inv="investor" role="radio" aria-checked="false">
+              <span class="inv-title">Investor</span>
+              <span class="inv-desc">My capital works; the brand's team operates.</span>
+              <span class="inv-models num">FOCO · COCO</span>
+            </button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="risk">Risk appetite</label>
+          <p class="field-help">Low appetite favours quick-payback formats; high appetite tolerates longer builds with bigger monthly profits.</p>
+          <div class="risk-row">
+            <input type="range" id="risk" min="1" max="5" step="1" value="3">
+            <output class="risk-readout" id="riskReadout"><span class="num">3</span>/5 — Balanced</output>
+          </div>
+          <div class="risk-scale"><span>Safety first</span><span>Aggressive</span></div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="wiz-step" data-step="3">
+        <div class="field">
+          <label>Which businesses appeal to you?</label>
+          <p class="field-help">Pick any number — or none to stay open to all eight.</p>
+          <div class="chip-row wrap" id="catChips" aria-label="Preferred categories"></div>
+        </div>
+      </div>
+
+      <div class="wiz-actions">
+        <button class="btn ghost" id="btnBack" hidden>Back</button>
+        <button class="btn primary" id="btnNext">Next</button>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results" class="results" hidden>
+      <div class="results-head">
+        <h2 id="resultsTitle">Your matches</h2>
+        <button class="btn ghost small" id="btnRedo">Edit answers</button>
+      </div>
+      <p class="results-sub" id="resultsSub"></p>
+      <div id="matchList" class="match-list"></div>
+      <div id="noMatch" class="empty" hidden>
+        <div class="empty-mark num">0/30</div>
+        <h3>No brand fits this budget yet</h3>
+        <p id="noMatchText"></p>
+        <button class="btn primary" id="btnRaise">Adjust my budget</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEADS VIEW ============ -->
+  <section id="view-leads" class="view" hidden>
+    <div class="results-head">
+      <h2>Captured leads</h2>
+      <a class="btn ghost small" href="/api/v1/leads.csv" download>Export CSV</a>
+    </div>
+    <p class="results-sub">Every "Request intro" lands here — this is the inventory brands pay for.</p>
+    <div class="card table-card">
+      <div class="table-scroll">
+        <table class="leads-table" id="leadsTable">
+          <thead>
+            <tr><th>Lead</th><th>Contact</th><th>City</th><th>Budget</th><th>Brand</th><th>Fit</th><th>Captured</th></tr>
+          </thead>
+          <tbody id="leadsBody"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="leadsEmpty">
+        <div class="empty-mark num">—</div>
+        <h3>No leads yet</h3>
+        <p>Run the quiz, open a match and choose “Request intro”. Each submission appears here instantly.</p>
+        <button class="btn primary" data-nav="discover">Start the quiz</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Brand drawer -->
+<div class="drawer-scrim" id="drawerScrim" hidden></div>
+<aside class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-label="Brand details">
+  <div class="drawer-head">
+    <div>
+      <p class="drawer-cat" id="dCat"></p>
+      <h2 class="drawer-name" id="dName"></h2>
+    </div>
+    <button class="icon-btn" id="drawerClose" aria-label="Close details">✕</button>
+  </div>
+  <div class="drawer-body">
+    <p class="drawer-story" id="dStory"></p>
+    <dl class="spec-grid">
+      <div><dt>Total investment</dt><dd class="num" id="dInvest"></dd></div>
+      <div><dt>Franchise fee</dt><dd class="num" id="dFee"></dd></div>
+      <div><dt>Royalty</dt><dd class="num" id="dRoyalty"></dd></div>
+      <div><dt>Min. area</dt><dd class="num" id="dArea"></dd></div>
+      <div><dt>Est. payback</dt><dd class="num" id="dPayback"></dd></div>
+      <div><dt>Est. monthly profit</dt><dd class="num" id="dProfit"></dd></div>
+      <div><dt>Models</dt><dd class="num" id="dModels"></dd></div>
+      <div><dt>City tiers</dt><dd class="num" id="dTiers"></dd></div>
+    </dl>
+    <div class="drawer-reason" id="dReason" hidden>
+      <h3>Why this fits you</h3>
+      <p id="dReasonText"></p>
+    </div>
+  </div>
+  <div class="drawer-foot">
+    <button class="btn primary wide" id="drawerIntro">Request intro</button>
+  </div>
+</aside>
+
+<!-- Lead modal -->
+<div class="modal-scrim" id="modalScrim" hidden>
+  <form class="modal card" id="leadForm">
+    <h2>Request an intro</h2>
+    <p class="modal-sub">We pass your details to <strong id="leadBrandName"></strong>’s franchise team. They call within 2 working days.</p>
+    <div class="field"><label for="leadName">Full name</label><input id="leadName" type="text" required placeholder="e.g. Priya Deshmukh"></div>
+    <div class="field"><label for="leadPhone">Phone</label><input id="leadPhone" type="tel" required placeholder="+91-98XXXXXXXX"></div>
+    <div class="field"><label for="leadEmail">Email</label><input id="leadEmail" type="email" required placeholder="you@example.in"></div>
+    <div class="field"><label for="leadBudget">Budget (₹ lakhs)</label><input id="leadBudget" type="number" min="1" step="0.5" required></div>
+    <p class="form-error" id="leadError" hidden></p>
+    <div class="modal-actions">
+      <button type="button" class="btn ghost" id="leadCancel">Cancel</button>
+      <button type="submit" class="btn primary" id="leadSubmit">Send my details</button>
+    </div>
+  </form>
+</div>
+
+<div class="toast num" id="toast" hidden></div>
+
+<footer class="footer">
+  <p><strong>Illustrative directory data.</strong> All brands shown are fictional examples created for this demo — not real trademarks. Figures are indicative estimates, not offers.</p>
+  <p class="footer-fine">FranFit · Brands pay for qualified leads · Made for Bharat’s next 1 lakh franchise owners</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
